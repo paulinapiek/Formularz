@@ -1,14 +1,14 @@
 ﻿@model Zad.Models.Dane
-@* 
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-
+@* 
 <form asp-action="Form" method="post">
     <div>
         <label asp-for="Imie">Twoje imie</label>
         <input asp-for="Imie" />
     </div>
-     <div>
+    <div>
         <label asp-for="Email">TTwoj email</label>
         <input asp-for="Email" />
     </div>
@@ -21,14 +21,35 @@
         <input asp-for="Tresc" />
     </div>
     <div><input type="submit" /></div>
-</form>
-@using (Html.BeginForm("Form", "Dane", FormMethod.Post))
-{
+</form> *@
+@using (Html.BeginForm("Form", "Dane", FormMethod.Post, new { id = "FormId" }))
+{ 
     @Html.ValidationSummary(false, "", new {@class="text-danger"})
     <p>Twoje imie: @Html.TextBoxFor(a=>a.Imie)</p>
-    <p>Twoj email: @Html.TextBoxFor(a=>a.Email)</p>
-    <p>Temat: @Html.TextBoxFor(a=>a.Temat)</p>
-    <p>Tresc: @Html.TextBoxFor(a=>a.Tresc)</p>
-    <input type="submit" placeholder="Prześlij"/>
+    <p>Nazwisko: @Html.TextBoxFor(a=>a.Nazwisko)</p>
+    <p>Twój email: @Html.TextBoxFor(a=>a.Email)</p>
+   // <p>Temat: @Html.TextBoxFor(a=>a.Temat)</p>
+    //<p>Tresc: @Html.TextBoxFor(a=>a.Tresc)</p>
+    <p>Podaj hasło: @Html.TextBoxFor(a=>a.Haslo)</p>
+    <p>Powtórz hasło: @Html.TextBoxFor(a=>a.PowtorzHaslo)</p>
+    <p>Numer telefonu: @Html.TextBoxFor(a=>a.Tel)</p>
+    <p>Wiek: @Html.TextBoxFor(a=>a.Wiek)</p>
+    <p>Miasto: 
+    <select asp-for="Miasto"
+            asp-items="Html.GetEnumSelectList<Dane.Kategorie>()">
+        </select>
+    </p>
+    <input type="submit" value="Prześlij" />
+    <input type="button" value="Wyczyść" onclick="ResetForm();" />
+    
+   
+
 }
+
+<script>
+    function ResetForm() {
+        document.getElementById('FormId').reset();
+    }
+</script>
+
 
